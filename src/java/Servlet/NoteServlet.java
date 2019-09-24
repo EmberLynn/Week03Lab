@@ -41,10 +41,15 @@ public class NoteServlet extends HttpServlet {
         BufferedReader br = new BufferedReader(new FileReader(new File(path)));
         
         String read_title = br.readLine();
-        String read_content = br.readLine();
+        String note_contents = "";
+        String read_content;
+        while ((read_content = br.readLine()) != null)
+        {
+           note_contents += read_content + "\n";
+        }
         
         
-        Note read_note = new Note(read_title, read_content);
+        Note read_note = new Note(read_title, note_contents);
         request.setAttribute("read", read_note);
         
         br.close();
